@@ -5,6 +5,9 @@
 <button id="submit">Отправить</button>
 <div id="message"></div>
 <input id="button1" type="button" value="OK">
+<br>
+<br>
+<input id="button2" type="button" value="Ok">
 </body>
 <script>
 
@@ -17,6 +20,13 @@ button1.onclick=async function(){
 };
  submit.onclick=async function(){
     let response = await fetch("/addcomment?newmsg="+encodeURIComponent(newmsg.value));
+    if (response.ok) { 
+       let data = await response.json();
+       message.innerText=data.message;
+    }
+ };
+ button2.onclick=async function(){
+	let response = await fetch("/testcommand2?test1="+"hello"+"&test2="+"hello2");
     if (response.ok) { 
        let data = await response.json();
        message.innerText=data.message;

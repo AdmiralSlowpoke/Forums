@@ -17,6 +17,9 @@ app.get('/testcommand',function(req,res){
     let errormessage='Произошла ошибка';
     res.send({error:{message:errormessage,code:errorcode}});
 });
+app.get('/testcommand2',function(req,res){
+    res.send({message:req.query.test1+' '+req.query.test2});
+});
 
 app.listen(3000, function () {
   console.log('Listening on port 3000!');
