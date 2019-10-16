@@ -13,7 +13,9 @@ app.get('/lastcomments', function(req, res) { // последние 10 сооб�
   res.send(msg.slice(-10)); 
 });
 app.get('/testcommand',function(req,res){
-    res.send({error:{message:'Произошла ошибка',code:304}});
+    let errorcode=304;
+    let errormessage='Произошла ошибка';
+    res.send({error:{message:errormessage,code:errorcode}});
 });
 
 app.listen(3000, function () {
