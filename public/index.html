@@ -1,0 +1,34 @@
+<html>
+<body>
+<pre id="chat"></pre>
+Сообщение: <input id="newmsg" type="text" size="100"><br>
+<button id="submit">Отправить</button>
+<div id="message"></div>
+<input id="button1" type="button" value="OK">
+</body>
+<script>
+
+button1.onclick=async function(){
+	let response = await fetch("/testcommand");
+    if (response.ok) { 
+       let data = await response.json();
+       message.innerText=data.error.message+" "+data.error.code;
+    }
+};
+ submit.onclick=async function(){
+    let response = await fetch("/addcomment?newmsg="+encodeURIComponent(newmsg.value));
+    if (response.ok) { 
+       let data = await response.json();
+       message.innerText=data.message;
+    }
+ };
+ // каждую секунду получаем сообщения и выводим в chat
+ setInterval(async function(){
+    let response = await fetch("/lastcomments");
+    if (response.ok) { 
+       let data = await response.json();
+       chat.innerText=data.join('\n');
+    }
+ },1000);
+</script>
+</html>
