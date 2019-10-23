@@ -19,7 +19,7 @@
 <input id="button4" type="button" value="Вывести темы">
 </body>
 <script>
-   let token;
+   let token=localStorage.getItem('token');
    button4.onclick=async function(){
       let response =await fetch("/getTopics?token="+token);
       if (response.ok) { 
@@ -32,13 +32,14 @@ button3.onclick=async function(){
    let response = await fetch("/auth?login="+encodeURIComponent(input1.value)+"&password="+encodeURIComponent(input2.value));
    if (response.ok) { 
        let data = await response.json();
-       if(data.error.code==='200'){
-          token=data.response.token;
-       message1.innerText=data.response.token;
-       console.log(token);
+       if(data.error){
+         message1.innerText=data.error.message+" "+data.error.code;
        }
        else
-       message1.innerText=data.error.message+" "+data.error.code;
+         token=data.response.token;
+         localStorage.setItem('token',token);
+         message1.innerText=data.response.token;
+         console.log(token);
     }
 }
 button1.onclick=async function(){

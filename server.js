@@ -6,14 +6,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
 let msg=[]; // храним сообщения в массиве
 // обработка запросов
-app.get('/auth',function(req,res){
+app.get('/login',function(req,res){
   console.log(req.query.login);
   console.log(req.query.password);
   if(req.query.login==='Maxim'&&req.query.password==='123')
   {
     let token1=uuidv4();
     msg.push(token1);
-    res.send({response:{token:token1},error:{message:'Success',code:'200'}});
+    res.send({response:{token:token1}});
   }
   else
   res.send({error:{message:'Неправильный логин/пароль',code:'304'}});
