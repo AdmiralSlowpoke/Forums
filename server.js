@@ -25,6 +25,15 @@ app.get('/addcomment', function(req, res) { // добавить сообщени
 app.get('/lastcomments', function(req, res) { // последние 10 сообщений
   res.send(msg.slice(-10)); 
 });
+app.get('/getTopics',function(req,res){
+for(let i=0;i<msg.length;i++){
+  if(req.query.token===msg[i]){
+    res.send({message:'Проверка'});
+  }
+  else
+  res.send({message:'Нет доступа'});
+}
+});
 app.get('/testcommand',function(req,res){
     let errorcode=304;
     let errormessage='Произошла ошибка';
