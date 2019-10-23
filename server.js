@@ -1,10 +1,22 @@
 let express = require('express');
 let app = express();
+const uuidv1 = require('uuid/v1');
 app.use(express.static(__dirname + '/public')); 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false })); 
 let msg=[]; // храним сообщения в массиве
 // обработка запросов
+app.get('/auth',function(req,res){
+  console.log(req.query.login);
+  console.log(req.query.password);
+  if(req.query.login==='Maxim'&&req.query.password==='123')
+  {
+    let token1=uuidv1();
+    res.send({response:{token:token1},error:{message:'Success',code:'200'}});
+  }
+  else
+  res.send({error:{message:'Произошла ошибка',code:'304'}});
+});
 app.get('/addcomment', function(req, res) { // добавить сообщение
   msg.push(req.query.newmsg);
   res.send({message:msg.length}); 

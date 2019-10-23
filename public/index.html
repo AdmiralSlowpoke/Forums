@@ -8,14 +8,34 @@
 <br>
 <br>
 <input id="button2" type="button" value="Ok">
+<br>
+<br>
+
+Введите логин и пароль
+<input id="input1" type="text">
+<input id="input2" type="text">
+<input id="button3" type="button" value="ok">
+<div id="message1"></div>
 </body>
 <script>
-
+button3.onclick=async function(){
+   console.log('/auth?login='+encodeURIComponent(input1.value)+'&password='+encodeURIComponent(input2.value));
+   let response = await fetch("/auth?login="+encodeURIComponent(input1.value)+"&password="+encodeURIComponent(input2.value));
+   if (response.ok) { 
+       let data = await response.json();
+       if(data.error.code==='200'){
+       message1.innerText=data.response.token;
+       }
+       else
+       message1.innerText=data.error.message+" "+data.error.code;
+    }
+}
 button1.onclick=async function(){
+   console.log('hi');
 	let response = await fetch("/testcommand");
     if (response.ok) { 
        let data = await response.json();
-       message.innerText=data.error.message+" "+data.error.code;
+       message.innerText=data.response.token;
     }
 };
  submit.onclick=async function(){
