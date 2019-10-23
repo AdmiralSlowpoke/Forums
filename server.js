@@ -1,5 +1,7 @@
 let express = require('express');
 let app = express();
+var cors = require('cors')
+app.use(cors())
 const uuidv4 = require('uuid/v4');
 app.use(express.static(__dirname + '/public')); 
 app.use(express.json()); 
@@ -13,7 +15,7 @@ app.get('/login',function(req,res){
   {
     let token1=uuidv4();
     msg.push(token1);
-    res.send({response:{token:token1}});
+    res.send({response:token1});
   }
   else
   res.send({error:{message:'Неправильный логин/пароль',code:'304'}});

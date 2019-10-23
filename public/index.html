@@ -28,8 +28,8 @@
     }
    }
 button3.onclick=async function(){
-   console.log('/auth?login='+encodeURIComponent(input1.value)+'&password='+encodeURIComponent(input2.value));
-   let response = await fetch("/auth?login="+encodeURIComponent(input1.value)+"&password="+encodeURIComponent(input2.value));
+   console.log('/login?login='+encodeURIComponent(input1.value)+'&password='+encodeURIComponent(input2.value));
+   let response = await fetch("/login?login="+encodeURIComponent(input1.value)+"&password="+encodeURIComponent(input2.value));
    if (response.ok) { 
        let data = await response.json();
        if(data.error){
